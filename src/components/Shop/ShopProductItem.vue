@@ -12,23 +12,24 @@
     </div>
     <div>
       <span>{{ product.price }}</span>
-      <button class="btn btn-primary btn-sm float-right">Commander</button>
+      <button
+        @click="addProductToCart"
+        class="btn btn-primary btn-sm float-right"
+      >
+        Commander
+      </button>
     </div>
   </div>
 </template>
 
 <script>
+import { eventBus } from "../../main";
 export default {
-  data() {
-    return {
-      product: {
-        img: "https://m.media-amazon.com/images/I/51zylG5gxfS._AC_SX679_.jpg",
-        title: "Play station 5",
-        description:
-          "La PS5 est une console de salon avec support optique (Blu-ray 4K) annoncé pour la fin d'année 2020.",
-        price: "400€",
-      },
-    };
+  props: ["product"],
+  methods: {
+    addProductToCart() {
+      eventBus.addProductToCart({ ...this.product });
+    },
   },
 };
 </script>

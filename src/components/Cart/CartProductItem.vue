@@ -1,10 +1,15 @@
 <template>
-  <div />
+<div class="d-flex flex-row justify-content-between p-2">
+<span>{{ item.title  }}</span> 
+<span><strong>{{ item.price }} €</strong></span>
+</div>
 </template>
 
 <script>
 
-export default {};
+export default {
+  props: ['item']
+};
 
 </script>
 
