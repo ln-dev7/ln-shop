@@ -6,7 +6,13 @@
       :key="item.id"
       :item="item"
     ></cart-product-item>
-    <hr class="w-100" />
+    <template v-if="cart.length">
+      <hr class="w-100" />
+      <span>Total : {{ total }} €</span>
+    </template>
+    <template v-else>
+      <span>Panier vide</span>
+    </template>
   </div>
 </template>
 
@@ -16,6 +22,14 @@ import CartProductItem from "./CartProductItem.vue";
 export default {
   components: { CartProductItem },
   props: ["cart"],
+  computed: {
+    total() {
+      return this.cart.reduce((acc, v) => {
+        acc += v.price;
+        return acc;
+      }, 0);
+    },
+  },
 };
 </script>
 
