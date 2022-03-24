@@ -15,10 +15,10 @@
     <div class="collapse navbar-collapse">
       <div class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link">Boutique</a>
+          <a class="nav-link" @click="changePage('UserWrapper')">Boutique</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link">Admin</a>
+          <a class="nav-link" @click="changePage('AdminWrapper')">Admin</a>
         </li>
       </div>
     </div>
@@ -26,7 +26,24 @@
 </template>
 
 <script>
-export default {};
+import { eventBus } from '../main';
+export default {
+  data(){
+    return{
+      page: eventBus.page
+    }
+  },
+  methods: {
+    changePage(page){
+      eventBus.changePage(page)
+      this.page = page
+    }
+  } 
+};
 </script>
 
-<style></style>
+<style>
+a{
+  cursor: pointer;
+}
+</style>

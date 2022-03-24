@@ -1,26 +1,36 @@
 <template>
   <div id="app">
     <the-header></the-header>
-    <user-wrapper></user-wrapper>
-    <admin-wrapper></admin-wrapper>
+    <div class="d-flex flex-column w-100">
+      <component :is="page"></component>
+    </div>
   </div>
 </template>
 
 <script>
-import TheHeader from './components/TheHeader.vue'
-import UserWrapper from './components/features/User/UserWrapper.vue'
-import AdminWrapper from './components/features/Admin/AdminWrapper.vue'
+import TheHeader from "./components/TheHeader.vue";
+import UserWrapper from "./components/features/User/UserWrapper.vue";
+import AdminWrapper from "./components/features/Admin/AdminWrapper.vue";
+import { eventBus } from "./main";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     TheHeader,
     UserWrapper,
-    AdminWrapper
+    AdminWrapper,
   },
-}
+  data() {
+    return {
+      page: eventBus.page,
+    };
+  },
+  created() {
+    eventBus.$on("update:page", (page) => {
+      this.page = page;
+    });
+  },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>
